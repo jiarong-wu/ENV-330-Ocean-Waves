@@ -16,7 +16,7 @@ The following setup steps have been tested only on the tiger cluster.
 ## Terrain setup <a name="paragraph1"></a>
 One important information we need to set up the simulation is the bathymetry. There are two major databases that we can fetch the bathymetry data from, [ETOPO](https://www.ncei.noaa.gov/products/etopo-global-relief-model) and [SRTM](https://www.usgs.gov/centers/eros/science/usgs-eros-archive-digital-elevation-shuttle-radar-topography-mission-srtm). (What's the difference? Resolution?)
 
-The terrain files have been prepared in advance for you. See [this doc](https://github.com/jiarong-wu/ENV-330-Ocean-Waves/blob/main/terrain_prep.md) if you are curious.
+**The terrain files have been prepared in advance for you; download from [here](https://drive.google.com/drive/folders/1bUBvUA6-bmJLVJDFnRKHl1B_VCOzAT4V?usp=sharing).** See [this doc](https://github.com/jiarong-wu/ENV-330-Ocean-Waves/blob/main/terrain_prep.md) if you are curious about where they come from.
  
 ## The fault model <a name="paragraph2"></a>
 A fault is a fracture or zone of fractures between two blocks of rock. Faults allow the blocks to move relative to each other. When the movement occurs rapidly, it forms an earthquake. The faults that trigger the tsunami are modeled using the [Okada model](http://basilisk.fr/src/okada.h). There can be several faults at different locations that shape the initial surface elevation profile together.
