@@ -43,8 +43,8 @@ We (or the students) still need to find the gauge data.
 ## Reference <a name="reference"></a>
 [The Basilisk page of the 2011 Tohoku tsunami example](http://basilisk.fr/src/examples/tohoku.c) </br>
 [The Basilisk page of the 2004 Indian Ocean tsunami example](http://basilisk.fr/src/examples/tsunami.c) </br>
-[The Gerris page](https://gfs.sourceforge.net/wiki/index.php/Xyz2kdt) (Gerris is the predecessor of Basilisk.)
-[Popinet 2011](https://link.springer.com/article/10.1007/s10236-011-0438-z)
-[Popinet 2020](https://www.sciencedirect.com/science/article/pii/S0021999120303831?via%3Dihub)
+[The Gerris page](https://gfs.sourceforge.net/wiki/index.php/Xyz2kdt) (Gerris is the predecessor of Basilisk.) </br>
+[Popinet 2011](https://link.springer.com/article/10.1007/s10236-011-0438-z) </br>
+[Popinet 2020](https://www.sciencedirect.com/science/article/pii/S0021999120303831?via%3Dihub) </br>
 
 
