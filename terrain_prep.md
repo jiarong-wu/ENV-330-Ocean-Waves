@@ -58,23 +58,57 @@ This line in the source code will find the files that match the etopo2 name unde
 `terrain (zb, "~/terrain/etopo2", NULL)`
 
 ## Steps to prepare the SRTM data set 
-This has not worked yet. Try this site `https://srtm.kurviger.de/SRTM3/Eurasia/index.html`. Or [Earth data](https://www.earthdata.nasa.gov/)? Or [this site](https://www.usna.edu/Users/oceano/pguth/md_help/html/srtm.htm)?
-```
-# SRTM_resultExport.csv from http://edcsns17.cr.usgs.gov/NewEarthExplorer/
-# see also http://gfs.sourceforge.net/wiki/index.php/Xyz2kdt
-files=`awk 'BEGIN{FS="\"|,"}{ if ($2!="ENTITY_ID") print $2;}' < SRTM_resultExport.csv | \
-    sed 's/SRTM3//g' | \
-    awk '{ print "http://dds.cr.usgs.gov/srtm/version2_1/SRTM3/Eurasia/" $1 ".hgt.zip" }'`
-for f in $files; do
-    wget $f
-done
+There seems to be no good way of downloading the SRTM data. The official site is unclear and requires authentication. I found the data from [this unoffical website](https://srtm.kurviger.de/SRTM3/Eurasia/index.html). Maybe try [Earth data](https://www.earthdata.nasa.gov/)? Or [this site](https://www.usna.edu/Users/oceano/pguth/md_help/html/srtm.htm)?
 
-cc `pkg-config glib-2.0 --cflags --libs` -Wall -O2 srtm2kdt.c -o srtm2kdt
+In any case, first find a way to download all the files in the `/SRTM3/Eurasia/` folder. This may take more than an hour. (This bash command `wget -r -l1 -A 'S*.zip' https://srtm.kurviger.de/SRTM3/Eurasia/ ./srtm.kurviger.de/SRTM3/Eurasia/` was helpful when I experienced internet interruption.)
+
+Similarly create a file named `srtm2kdt.c`:
+
+```
+#include <stdio.h>
+#include <assert.h>
+#include <stdlib.h>
+#include <glib.h>
+ 
+#define NCOLS 1201
+#define NROWS 1201
+#define CELLSIZE (1./(NCOLS - 1))
+#define NODATA_VALUE -32768
+ 
+int main (int argc, char * argv[])
+{
+  double lat, lon;
+  gint16 v, vs;
+  int i, j;
+ 
+  double xllcorner = atof (argv[1]);
+  double yllcorner = atof (argv[2]);
+ 
+  for (j = 0; j < NROWS; j++) {
+    lat = yllcorner + CELLSIZE*(NROWS - 1 - j);
+    for (i = 0; i < NCOLS; i++) {
+      lon = xllcorner + CELLSIZE*i;
+      assert (fread (&v, sizeof (gint16), 1, stdin));
+      vs = GINT16_FROM_BE (v);
+      if (vs > 0)
+	printf ("%.8f %.8f %d\n", lon, lat, vs);
+    }
+    //    fprintf (stderr, "\rRow %d/%d              ", j + 1, NROWS);
+  }
+  //  fputc ('\n', stderr);
+  return 0;
+}
+```
+and compile using `cc 'pkg-config glib-2.0 --cflags --libs' -Wall -O2 srtm2kdt.c -o srtm2kdt` (notice the backtick). I ran into problem when trying it on the cluster with the `#include <glib.h>` and the gtk library, so I ended doing it on my personal laptop.
+
+```
 for f in *.zip; do
     p=`echo $f | sed 's/.*\([NS]\)\([0-9][0-9]\)\([WE]\)\([0-9][0-9][0-9]\)\.hgt\.zip/\1 \2 \3 \4/'`
     lat=`echo $p | awk '{if ($1 == "S") print -$2; else print $2;}'`
     lon=`echo $p | awk '{if ($3 == "W") print -$4; else print $4;}'`
     echo $f >> /dev/stderr
     unzip -c -q $f | ./srtm2kdt $lon $lat
-done | xyz2kdt -v $HOME/terrain/srtm_japan
+done | xyz2kdt -v $HOME/terrain/srtm_eurasia 
 ```
+
+This script loops through the latitude and longitude to construct the end terrain file `srtm_eurasia`. This took about an hour in my case. A useful website [explainshell](https://explainshell.com/).
