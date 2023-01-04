@@ -62,7 +62,7 @@ There seems to be no good way of downloading the SRTM data. The official site is
 
 In any case, first find a way to download all the files in the `/SRTM3/Eurasia/` folder. This may take more than an hour. (This bash command `wget -r -l1 -A 'S*.zip' https://srtm.kurviger.de/SRTM3/Eurasia/ ./srtm.kurviger.de/SRTM3/Eurasia/` was helpful when I experienced internet interruption.)
 
-Similarly create a file named `srtm2kdt.c`:
+Similarly in the directory where the `srtm.kurviger.de` folder is located, create a file named `srtm2kdt.c`:
 
 ```
 #include <stdio.h>
@@ -99,16 +99,18 @@ int main (int argc, char * argv[])
   return 0;
 }
 ```
-and compile using `cc 'pkg-config glib-2.0 --cflags --libs' -Wall -O2 srtm2kdt.c -o srtm2kdt` (notice the backtick). I ran into problem when trying it on the cluster with the `#include <glib.h>` and the gtk library, so I ended doing it on my personal laptop.
+and compile using `cc 'pkg-config glib-2.0 --cflags --libs' -Wall -O2 srtm2kdt.c -o srtm2kdt` (notice the backtick). Then run the following bash script.
 
 ```
-for f in *.zip; do
+for f in srtm.kurviger.de/SRTM3/Eurasia/*.hgt.zip; do
     p=`echo $f | sed 's/.*\([NS]\)\([0-9][0-9]\)\([WE]\)\([0-9][0-9][0-9]\)\.hgt\.zip/\1 \2 \3 \4/'`
     lat=`echo $p | awk '{if ($1 == "S") print -$2; else print $2;}'`
     lon=`echo $p | awk '{if ($3 == "W") print -$4; else print $4;}'`
     echo $f >> /dev/stderr
     unzip -c -q $f | ./srtm2kdt $lon $lat
-done | xyz2kdt -v $HOME/terrain/srtm_eurasia 
+done | xyz2kdt -v srtm_eurasia 
 ```
 
-This script loops through the latitude and longitude to construct the end terrain file `srtm_eurasia`. This took about an hour in my case. A useful website [explainshell](https://explainshell.com/).
+This script loops through the latitude and longitude to construct the end terrain file `srtm_eurasia`. This took about four hours on the tiger cluster (1 core) in my case. I could not run this script on my personal laptop due to memory constraints.
+
+PS: a useful website [explainshell](https://explainshell.com/) to decipher shell script.
