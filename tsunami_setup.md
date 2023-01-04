@@ -4,7 +4,8 @@ This document contains the steps to set up the tsunami case using Basilisk (give
 1. [Introduction](#introduction)
 2. [Terrain setup](#paragraph1)
 3. [Fault models](#paragraph2)
-4. [Outputs](#outputs)
+4. [Compile and running the simulations](#running)
+5. [Outputs](#outputs)
     1. [Comparison with gauge data](#gauge)
 6. [Reference](#reference)
 
@@ -23,6 +24,11 @@ A fault is a fracture or zone of fractures between two blocks of rock. Faults al
 
 For the Indian ocean example, there is only one fault used to initialize the sea surface elevation (see the source code for its location and strength).
 For the Tohoku example, the fault information is obtained through seismic inversion of the actual earthquake. There are several sub-faults and they are listed in [this header file](http://basilisk.fr/src/examples/tohoku/faults.h), which is already included and nothing additional needs to be done.
+
+## Compile and run the code <a name="running"></a>
+Compile using the makefile `make -f Makefile.parallel.tiger OUTPUT=SOURCE_CODE_NAME_WITHOUT_c`. Run using a slurm script (keep writing this part).
+
+The `tohoku2011` case took about 300 CPU hrs (64 cores 4 hrs) at refinement LEVEL=13.
 
 ## Outputs <a name="outputs"></a>
 The outputs are the following:
