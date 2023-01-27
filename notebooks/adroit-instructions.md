@@ -6,7 +6,7 @@ stay active, number of cores (typically 1), and use default settings for all the
 
 You might need to refresh the webpage to see the session being active.
 
-![image](https://user-images.githubusercontent.com/44583114/214600028-99acda37-c68c-4534-a0e9-4971d48665b3.png)
+![Screenshot of MyAdroit](https://user-images.githubusercontent.com/44583114/214600028-99acda37-c68c-4534-a0e9-4971d48665b3.png)
 
 
 After that, click "Connect to Jupyter", and you should be taken to your home directory on Adroit `/home/yournetid`.
