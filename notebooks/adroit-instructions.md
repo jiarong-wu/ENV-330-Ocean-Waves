@@ -17,7 +17,7 @@ On Adroit, you have your own `/home/yournetid` directory as a student user. If y
 There are two ways you can move the notebook files into your Adroit home directory. One is to download them from Canvas onto your personal laptop and then upload them through the "Files" interface. Similarly you can download files from Adroit to your personal laptop and then submit them on Canvas. The other way is to copy files from the shared folder `/home/ENV330` on canvas to your own home directory. We will have a copy of the Canvas materials inside the `/home/ENV330` folder. The shared folder `/home/ENV330` also sits on Adroit but you only have read permission to it. Therefore, you should copy the files (including the notebooks and additional data files) to your own home directory and work on them from your home directory. The second way might prove easier especially when we want to move large data files. 
 
 To copy from the shared folder, you need the command line copy [cp](https://www.ibm.com/docs/en/aix/7.1?topic=files-copying-cp-command). 
-Click "Open in Terminal", type 
+On the MyAdroit Web Portal, click "Cluster" and "Adroit cluster shell access", which takes you to the terminal window. From there type 
 
 `cp full_path_of_the_file_being_moved full_path_of_destination` 
 
