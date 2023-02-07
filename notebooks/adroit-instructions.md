@@ -12,6 +12,9 @@ After that, click "Connect to Jupyter", and you should be taken to your home dir
 When you work on a particular notebook, remember to switch to the ENV330 kernel by "Kernel", "Change kernels" where
 "env330 [~/opt/export/course/env330/anaconda3/envs/env330/]" should be chosen.
 
+## Using the Visualization node instead of the compute node when internet connection is needed
+For some tasks when internet connection is needed (e.g. retrieving the buoy data in assignment 2), remember to use the visualization node instead of the compute node. To do so, under "Interactive Apps" choose "Jupyter for Classes on Adroit Vis" and everything else should be the same. The visualization node is relatively small with limited computing resources. If you run into any issue using the visualization node, please inform the AI (jiarongw@princeton.edu).
+
 # Adroit file systems and move things around
 On Adroit, you have your own `/home/yournetid` directory as a student user. If you click on the "Files" tab on the MyAdroit Web Portal, you will be able to see and manipulate your files from there. `/home/yournetid` is your home directory, your safe place. You can write and delete things as you want, given that you do not exceed the given file storage quota. (You can check your quota under the "Files" tab as well.) You also have your own `/scratch/network/yournetid` directory, which acts as a temporary storage place, as the name suggests. You can use it to store temporary large files or files generated during simulations (which we might need later in the semester).
 
