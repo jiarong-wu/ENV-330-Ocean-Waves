@@ -9,3 +9,5 @@
 [NASA visualization](https://svs.gsfc.nasa.gov/3659)
 
 [The ECCO project](https://svs.gsfc.nasa.gov/3659)
+
+[Resolution of SWOT satellite](https://swot.jpl.nasa.gov/resources/148/altimetry-past-present-and-future/)
